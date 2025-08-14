@@ -150,11 +150,15 @@ const App = () => {
             audioContextRef.current = context;
             const destination = context.createMediaStreamDestination();
 
-            const displaySource = context.createMediaStreamSource(displayStream);
-            displaySource.connect(destination);
-
+            // Connect microphone audio
             const userSource = context.createMediaStreamSource(userStream);
             userSource.connect(destination);
+
+            // Conditionally connect screen audio if it exists
+            if (displayStream.getAudioTracks().length > 0) {
+                const displaySource = context.createMediaStreamSource(displayStream);
+                displaySource.connect(destination);
+            }
             
             const mixedStream = destination.stream;
 
