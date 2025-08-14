@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback, ReactNode } from 'react';
-import ReactMarkdown from 'https://esm.sh/react-markdown@9';
-import remarkGfm from 'https://esm.sh/remark-gfm@4';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { AppStatus } from './types';
 import { MicrophoneIcon, StopIcon, SparklesIcon, CopyIcon, CheckIcon, ResetIcon, PaperAirplaneIcon, DocumentTextIcon } from './components/icons';
 import { generateMinutesFromText, transcribeAudio } from './services/geminiService';
