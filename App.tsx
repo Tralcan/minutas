@@ -49,6 +49,7 @@ const App = () => {
     const [isSendingToNotion, setIsSendingToNotion] = useState(false);
     const [notionSendSuccess, setNotionSendSuccess] = useState<boolean | null>(null);
     const [loadingMessage, setLoadingMessage] = useState('');
+    const [isSafari, setIsSafari] = useState(false);
 
     // Refs for audio processing
     const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -118,6 +119,13 @@ const App = () => {
             cleanupStreams();
         };
     }, [cleanupStreams]);
+
+    useEffect(() => {
+        // Simple Safari detection
+        const ua = navigator.userAgent;
+        const isSafariBrowser = /^((?!chrome|android).)*safari/i.test(ua);
+        setIsSafari(isSafariBrowser);
+    }, []);
 
     const generateAndSetMinutes = useCallback(async (transcription: string) => {
         if (!transcription.trim()) {
@@ -618,6 +626,11 @@ const App = () => {
             default:
                 return (
                     <div className="text-center flex flex-col items-center gap-6">
+                        {isSafari && (
+                            <div className="p-4 mb-4 text-sm text-yellow-300 bg-yellow-900/30 rounded-lg border border-yellow-400/50" role="alert">
+                                <span className="font-bold">Aviso para usuarios de Safari:</span> Para una grabación completa (incluyendo a todos los participantes), recomendamos usar Google Chrome. Safari solo permitirá grabar el audio de tu micrófono.
+                            </div>
+                        )}
                         <h2 className="text-3xl font-bold">Asistente de Minutas de Reunión</h2>
                         <p className="text-gray-400 max-w-lg">Elija cómo desea comenzar. Grabe una reunión completa o pegue una transcripción existente para generar una minuta profesional.</p>
                         <div className="flex flex-col sm:flex-row gap-4 mt-4">
