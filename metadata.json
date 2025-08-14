@@ -1,0 +1,8 @@
+{
+  "name": "Asistente de Minutas de Reunión",
+  "description": "Graba tus reuniones, obtén una transcripción y genera automáticamente una minuta profesional y estructurada. Simplifica el seguimiento de acuerdos y tareas.",
+  "requestFramePermissions": [
+    "microphone",
+    "display-capture"
+  ]
+}
